@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 const bitsharesjs = require('bitsharesjs');
 const lzma = require('lzma');
 const PrivateKey = bitsharesjs.PrivateKey;
@@ -12,7 +11,8 @@ const fs = require('fs');
 
 const binfilePath = '/Users/liyunhan/workspace/bts_default_20170914.bin';
 //const binfilePath = '/Users/liyunhan/Downloads/bts_default_20171024.bin';
-const password = 'Shmily0620$$god';
+
+
 
 var pwdseed = [
     "Liyh",
