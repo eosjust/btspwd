@@ -38,6 +38,9 @@ router.get('/', function (req, res, next) {
         num=6;
     }
     var work1 = fork(process.cwd()+'/utils/testworker.js');
+    if(work1){
+        res.send("has work1");
+    }
     work1.on('message', function (m) {//接收工作进程计算结果
         if (m.method == 'getWorker') {
             res.send("work run");
