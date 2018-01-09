@@ -5,7 +5,7 @@ var router = express.Router();
 const fs = require('fs');
 var path = require('path');
 var coderootdir=path.dirname(__dirname);
-var binfilePath = process.cwd()+'/public/res/bts_default_20170914.bin';
+var binfilePath = coderootdir+'/public/res/bts_default_20170914.bin';
 
 var pwdseeds = [
     "Liyh",
@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
     if(!num){
         num=6;
     }
-    var work1 = fork(process.cwd()+'/utils/testworker.js');
+    var work1 = fork(coderootdir+'/utils/testworker.js');
     work1.on('message', function (m) {//接收工作进程计算结果
         if (m.method == 'getWorker') {
             res.send("work run");
