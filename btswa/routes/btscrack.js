@@ -40,6 +40,7 @@ router.get('/', function (req, res, next) {
     var work1 = fork('./utils/testworker.js');
     work1.on('message', function (m) {//接收工作进程计算结果
         if (m.method == 'getWorker') {
+            res.send("work run");
             work1.send({method: 'run'});
         }
         if (m.method == 'progress') {
@@ -49,7 +50,7 @@ router.get('/', function (req, res, next) {
     });
     //
     work1.send({method: 'initWorker', pwdseed: pwdseeds, pwdnum: num, binpath: binfilePath});
-    res.send("hahal");
+
 });
 
 router.get('/getinfo', function (req, res, next) {
