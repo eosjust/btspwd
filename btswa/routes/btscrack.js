@@ -3,7 +3,7 @@ var hashmap=require('../utils/hashmap');
 var fork = require('child_process').fork;
 var router = express.Router();
 const fs = require('fs');
-var binfilePath = '/res/bts_default_20170914.bin';
+var binfilePath = process.cwd()+'/public/res/bts_default_20170914.bin';
 
 var pwdseeds = [
     "Liyh",
