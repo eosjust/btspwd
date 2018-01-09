@@ -65,6 +65,16 @@ router.get('/getinfo', function (req, res, next) {
     }
     res.send(str);
 });
+router.get('/hasfile', function (req, res, next) {
+    var backup_buffer= fs.readFileSync(binfilePath);
+    if(backup_buffer){
+        res.send('has file');
+    }else{
+        res.send('has not');
+    }
+});
+
+
 
 function HashMap() {
     //定义长度
