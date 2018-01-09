@@ -2,7 +2,7 @@ var express = require('express');
 var fork = require('child_process').fork;
 var router = express.Router();
 
-var binfilePath = '/Users/liyunhan/workspace/bts_default_20170914.bin';
+var binfilePath = '/res/bts_default_20170914.bin';
 
 var pwdseeds = [
     "Liyh",
