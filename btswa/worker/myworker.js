@@ -1,3 +1,10 @@
+
+function run() {
+    
+}
+function initWorker(pwdseed,pwdnum,binpath) {
+
+}
 process.on('message', function (m) {
 //接收主进程发送过来的消息
     try{
@@ -5,10 +12,8 @@ process.on('message', function (m) {
             console.log("initWorker");
             console.log(m.binpath);
             initWorker(m.pwdseed,m.pwdnum,m.binpath);
-            console.log(comperm.getinfo());
             var message=new Object();
-            message.method='getWorker';
-            message.obj=comperm;
+            message.method='initWorkerSuccess';
             process.send(message);
         }
     }catch (ex){
