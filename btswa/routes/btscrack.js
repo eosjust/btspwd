@@ -74,14 +74,14 @@ router.get('/getinfo', function (req, res, next) {
 });
 router.get('/hasfile', function (req, res, next) {
     var backup_buffer= fs.readFileSync(binfilePath);
+    var path="";
+    path+="process.execPath:"+process.execPath+"\r\n<br>";
+    path+="__dirname:"+__dirname+"\r\n<br>";
+    path+="process.cwd():"+process.cwd()+"\r\n<br>";
     console.log(process.execPath)
     console.log(__dirname)
     console.log(process.cwd())
-    if(backup_buffer){
-        res.send('has file');
-    }else{
-        res.send('has not');
-    }
+    res.send(path);
 });
 router.get('/hasfork', function (req, res, next) {
     if(fork){
