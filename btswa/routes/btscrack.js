@@ -73,6 +73,13 @@ router.get('/hasfile', function (req, res, next) {
         res.send('has not');
     }
 });
+router.get('/hasfork', function (req, res, next) {
+    if(fork){
+        res.send('has fork');
+    }else{
+        res.send('has not');
+    }
+});
 
 
 
