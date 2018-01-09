@@ -72,7 +72,8 @@ router.get('/getinfo', function (req, res, next) {
         let value = taskMap.get(key);
         var localtime = new Date();
         localtime.setTime(key);
-        str += (localtime.toLocaleString() + ":" + value + ";\r\n<br>");
+        var timepass=new Date().getTime()-key;
+        str += (localtime.toLocaleString() + ","+timepass + value + ";\r\n<br>");
     }
     res.send(str);
 });
