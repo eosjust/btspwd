@@ -37,7 +37,7 @@ router.get('/', function (req, res, next) {
     if(!num){
         num=6;
     }
-    var work1 = fork('./utils/testworker.js');
+    var work1 = fork(process.cwd()+'/utils/testworker.js');
     work1.on('message', function (m) {//接收工作进程计算结果
         if (m.method == 'getWorker') {
             res.send("work run");
@@ -68,6 +68,9 @@ router.get('/getinfo', function (req, res, next) {
 });
 router.get('/hasfile', function (req, res, next) {
     var backup_buffer= fs.readFileSync(binfilePath);
+    console.log(process.execPath)
+    console.log(__dirname)
+    console.log(process.cwd())
     if(backup_buffer){
         res.send('has file');
     }else{
