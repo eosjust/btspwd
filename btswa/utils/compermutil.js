@@ -10,7 +10,7 @@ var CompermUtil = {
     startTime: null,
     canloop:true,
     init: function (oriArr, m, n) {
-        this.startTime = new Date();
+        this.startTime = new Date().getTime();
         this.oriArr = oriArr;
         this.m = m;
         this.n = n;

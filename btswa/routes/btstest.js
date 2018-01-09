@@ -59,10 +59,10 @@ var decryptBts=function (pwd,path) {
         } catch (error) {
             resolve("-5");
         }
-        // fs.readFile(binfilePath, function (err, backup_buffer) {
-        //
-        //
-        // });
+        fs.readFile(binfilePath, function (err, backup_buffer) {
+
+
+        });
     });
 }
 
