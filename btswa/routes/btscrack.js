@@ -1,4 +1,5 @@
 var express = require('express');
+var hashmap=require('../utils/hashmap');
 var fork = require('child_process').fork;
 var router = express.Router();
 const fs = require('fs');
@@ -30,7 +31,7 @@ var pwdseeds = [
     "@",
     "@"
 ];
-var taskMap = new HashMap();
+var taskMap = Object.create(hashmap);
 
 router.get('/', function (req, res, next) {
     var num=req.query.num;
@@ -38,9 +39,6 @@ router.get('/', function (req, res, next) {
         num=6;
     }
     var work1 = fork(process.cwd()+'/utils/testworker.js');
-    if(work1){
-        res.send("has work1");
-    }
     work1.on('message', function (m) {//接收工作进程计算结果
         if (m.method == 'getWorker') {
             res.send("work run");
@@ -52,13 +50,18 @@ router.get('/', function (req, res, next) {
         }
     });
     //
-    work1.send({method: 'initWorker', pwdseed: pwdseeds, pwdnum: num, binpath: binfilePath});
+    var message=new Object();
+    message.method='initWorker';
+    message.pwdseed=pwdseeds;
+    message.pwdnum=num;
+    message.binpath=binfilePath;
+    work1.send(message);
 
 });
 
 router.get('/getinfo', function (req, res, next) {
 
-    let str = "";
+    let str = "result:"+"\r\n<br>";
     let keyarr = taskMap.keySet();
     for (let i = 0; i < keyarr.length; i++) {
         let key = keyarr[i];
@@ -90,100 +93,6 @@ router.get('/hasfork', function (req, res, next) {
 
 
 
-function HashMap() {
-    //定义长度
-    var length = 0;
-    //创建一个对象
-    var obj = new Object();
 
-    /**
-     * 判断Map是否为空
-     */
-    this.isEmpty = function () {
-        return length == 0;
-    };
-
-    /**
-     * 判断对象中是否包含给定Key
-     */
-    this.containsKey = function (key) {
-        return (key in obj);
-    };
-
-    /**
-     * 判断对象中是否包含给定的Value
-     */
-    this.containsValue = function (value) {
-        for (var key in obj) {
-            if (obj[key] == value) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    /**
-     *向map中添加数据
-     */
-    this.put = function (key, value) {
-        if (!this.containsKey(key)) {
-            length++;
-        }
-        obj[key] = value;
-    };
-
-    /**
-     * 根据给定的Key获得Value
-     */
-    this.get = function (key) {
-        return this.containsKey(key) ? obj[key] : null;
-    };
-
-    /**
-     * 根据给定的Key删除一个值
-     */
-    this.remove = function (key) {
-        if (this.containsKey(key) && (delete obj[key])) {
-            length--;
-        }
-    };
-
-    /**
-     * 获得Map中的所有Value
-     */
-    this.values = function () {
-        var _values = new Array();
-        for (var key in obj) {
-            _values.push(obj[key]);
-        }
-        return _values;
-    };
-
-    /**
-     * 获得Map中的所有Key
-     */
-    this.keySet = function () {
-        var _keys = new Array();
-        for (var key in obj) {
-            _keys.push(key);
-        }
-        return _keys;
-    };
-
-    /**
-     * 获得Map的长度
-     */
-    this.size = function () {
-        return length;
-    };
-
-    /**
-     * 清空Map
-     */
-    this.clear = function () {
-        length = 0;
-        obj = new Object();
-    };
-}
 
 module.exports = router;

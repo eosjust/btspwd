@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var btscrack=require('./routes/btscrack');
 var btstest=require('./routes/btstest');
 var comtest=require('./routes/comtest');
+var worktest=require('./routes/worktest');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/users', users);
 app.use('/btscrack',btscrack);
 app.use('/btstest',btstest);
 app.use('/comtest',comtest);
+app.use('/worktest',worktest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
