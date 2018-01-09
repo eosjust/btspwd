@@ -34,14 +34,14 @@ function decryptBtsWallet(pwd, fileBuffer) {
     try {
         fileBuffer = Aes.decrypt_with_checksum(
             privateKey, publicKey, null/*nonce*/, fileBuffer);
-        Decompress(fileBuffer, wallet_string => {
-            try {
-                let wallet_object = JSON.parse(wallet_string);
-                console.log(wallet_object);
-            } catch (error) {
-
-            }
-        });
+        // Decompress(fileBuffer, wallet_string => {
+        //     try {
+        //         let wallet_object = JSON.parse(wallet_string);
+        //         console.log(wallet_object);
+        //     } catch (error) {
+        //
+        //     }
+        // });
         obj.code = 0;
         obj.msg = pwd;
         return obj;
